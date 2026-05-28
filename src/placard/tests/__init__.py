@@ -1,1 +1,1 @@
-"""Tests for {{project_name}}."""
+"""Tests for placard."""

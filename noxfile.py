@@ -67,7 +67,9 @@ def tests(session):
         "-m",
         "virtue",
         *tests,
-        env=dict(COVERAGE_FILE=os.path.join(tmpdir, "coverage"), TMPDIR=tmpdir),
+        env=dict(
+            COVERAGE_FILE=os.path.join(tmpdir, "coverage"), TMPDIR=tmpdir
+        ),
     )
     fail_under = "--fail-under=100"
     session.run(
