@@ -41,9 +41,6 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 [project.urls]
 Homepage = "https://github.com/moshez/placard"
 
-[tool.black]
-line-length = 79
-
 [tool.autocalver]
 use = true
 log = "git-log-head"

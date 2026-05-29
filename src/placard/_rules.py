@@ -9,12 +9,8 @@ from dataclasses import dataclass
 from typing import Iterator
 
 RECOGNIZED: frozenset[str] = frozenset({"Args", "Returns", "Raises", "Yields"})
-_RECOGNIZED_LOWER: frozenset[str] = frozenset(
-    label.lower() for label in RECOGNIZED
-)
-_CANONICAL_HEADERS: frozenset[str] = frozenset(
-    f"{label}:" for label in RECOGNIZED
-)
+_RECOGNIZED_LOWER: frozenset[str] = frozenset(label.lower() for label in RECOGNIZED)
+_CANONICAL_HEADERS: frozenset[str] = frozenset(f"{label}:" for label in RECOGNIZED)
 _CANONICAL_ARGS = "Args:"
 
 _SIGNATURE_LIKE = re.compile(r"^[A-Za-z_]\w*\(")
@@ -94,9 +90,7 @@ def _bare_word_defect(label: str, stripped: str) -> Violation | None:
     )
 
 
-def _colon_form_defect(
-    label: str, tail: str, stripped: str
-) -> Violation | None:
+def _colon_form_defect(label: str, tail: str, stripped: str) -> Violation | None:
     if label in RECOGNIZED:
         if tail.strip():
             return Violation(
@@ -125,9 +119,7 @@ def _args_bodies(
         if entry != entry.lstrip() or entry.rstrip() != _CANONICAL_ARGS:
             continue
         body_start = cursor
-        while cursor < len(cleaned_lines) and _is_body_member(
-            cleaned_lines[cursor]
-        ):
+        while cursor < len(cleaned_lines) and _is_body_member(cleaned_lines[cursor]):
             cursor += 1
         yield cleaned_lines[body_start:cursor]
 

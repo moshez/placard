@@ -67,9 +67,7 @@ def tests(session):
         "-m",
         "virtue",
         *tests,
-        env=dict(
-            COVERAGE_FILE=os.path.join(tmpdir, "coverage"), TMPDIR=tmpdir
-        ),
+        env=dict(COVERAGE_FILE=os.path.join(tmpdir, "coverage"), TMPDIR=tmpdir),
     )
     fail_under = "--fail-under=100"
     session.run(
@@ -110,7 +108,14 @@ def lint(session):
     session.install("-r", "requirements-lint.txt")
     session.install("-e", ".")
     session.run("black", "--check", "--diff", *files)
-    session.run("python", "-m", "stolid", "src/")
+    session.run(
+        "python",
+        "-m",
+        "stolid",
+        "--max-line-length=88",
+        "--ignore=E203,E503,W503",
+        "src/",
+    )
 
 
 @nox.session(python=VERSIONS[-1])
