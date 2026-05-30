@@ -36,5 +36,5 @@ pyflakes==3.4.0
     # via flake8
 pytokens==0.4.1
     # via black
-stolid==2026.5.27.72525
+stolid==2026.5.30.72219
     # via placard (pyproject.toml)

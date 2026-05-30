@@ -33,7 +33,15 @@ class Violation:
     message: str
 
 
-def _violations(text: str) -> Iterator[Violation]:
+def violations(text: str) -> Iterator[Violation]:
+    """Yield every PLC violation in cleaned docstring ``text``.
+
+    Args:
+        text: The cleaned docstring (as returned by ``ast.get_docstring``).
+
+    Yields:
+        One :class:`Violation` per defect found, in source-scan order.
+    """
     cleaned_lines = tuple(text.splitlines())
     yield from _summary_violations(cleaned_lines)
     yield from _header_violations(cleaned_lines)
@@ -44,7 +52,7 @@ def _violations(text: str) -> Iterator[Violation]:
 def _summary_violations(
     cleaned_lines: tuple[str, ...],
 ) -> Iterator[Violation]:
-    if not cleaned_lines or not cleaned_lines[0].strip():
+    if not cleaned_lines:
         yield Violation(code="PLC101", message="Summary is empty")
         return
     summary = cleaned_lines[0]

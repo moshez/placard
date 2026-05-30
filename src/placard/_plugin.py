@@ -7,7 +7,7 @@ import ast
 from dataclasses import dataclass
 from typing import Iterator
 
-from ._rules import _violations
+from ._rules import violations
 
 _DOCSTRING_NODES = (
     ast.Module,
@@ -49,7 +49,7 @@ class Plugin:  # noqa: SLD503
             if text is None:
                 continue
             anchor = node.body[0]
-            for problem in _violations(text):
+            for problem in violations(text):
                 yield (
                     anchor.lineno,
                     anchor.col_offset,
