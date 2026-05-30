@@ -8,9 +8,7 @@ import re
 from dataclasses import dataclass
 from typing import Iterator
 
-RECOGNIZED: frozenset[str] = frozenset(
-    {"Args", "Attributes", "Raises", "Returns", "Yields"}
-)
+RECOGNIZED = frozenset({"Args", "Attributes", "Raises", "Returns", "Yields"})
 _RECOGNIZED_LOWER: frozenset[str] = frozenset(label.lower() for label in RECOGNIZED)
 _CANONICAL_HEADERS: frozenset[str] = frozenset(f"{label}:" for label in RECOGNIZED)
 _CANONICAL_ARGS = "Args:"

@@ -34,7 +34,7 @@ class Plugin:  # noqa: SLD503
 
     def run(  # noqa: SLD303
         self,
-    ) -> Iterator[tuple[int, int, str, type[Plugin]]]:
+    ) -> Iterator[tuple[int, int, str, type]]:
         """Walk ``self.tree`` and yield PLC violations.
 
         Yields:
