@@ -10,18 +10,16 @@ from hamcrest import assert_that, contains_string, equal_to, has_item
 from .._plugin import Plugin
 
 
-def _runs(
-    tree: ast.AST,
-) -> list[tuple[int, int, str, type[Plugin]]]:
-    return list(Plugin(tree=tree).run())
+def _runs(source: str) -> list[tuple[int, int, str, type[Plugin]]]:
+    return list(Plugin(tree=ast.parse(source)).run())
 
 
 def _codes_in(source: str) -> list[str]:
-    return [run[2].split()[0] for run in _runs(ast.parse(source))]
+    return [run[2].split()[0] for run in _runs(source)]
 
 
 def _first_run(source: str) -> tuple[int, int, str, type[Plugin]]:
-    return _runs(ast.parse(source))[0]
+    return _runs(source)[0]
 
 
 class TestPluginDispatch(unittest.TestCase):
