@@ -31,7 +31,12 @@ class Plugin:  # noqa: SLD503
     def run(  # noqa: SLD303
         self,
     ) -> Iterator[tuple[int, int, str, type[Plugin]]]:
-        """Yield ``(line, col, message, type)`` for each PLC violation."""
+        """Walk ``self.tree`` and yield PLC violations.
+
+        Yields:
+            One ``(line, col, message, type)`` tuple per PLC violation,
+            located at the offending docstring's expression node.
+        """
         owner = type(self)
         for node in ast.walk(self.tree):
             if not isinstance(node, _DOCSTRING_NODES):

@@ -7,7 +7,11 @@
 black==26.5.1
     # via placard (pyproject.toml)
 click==8.4.1
-    # via black
+    # via
+    #   black
+    #   pydoclint
+docstring-parser-fork==0.0.14
+    # via pydoclint
 flake8==7.3.0
     # via placard (pyproject.toml)
 mccabe==0.7.0
@@ -26,6 +30,8 @@ platformdirs==4.9.6
     # via black
 pycodestyle==2.14.0
     # via flake8
+pydoclint==0.8.4
+    # via placard (pyproject.toml)
 pyflakes==3.4.0
     # via flake8
 pytokens==0.4.1
