@@ -24,7 +24,11 @@ _DOCSTRING_NODES = (
 # that lookup.
 @dataclass(frozen=True, slots=True)
 class Plugin:  # noqa: SLD503
-    """Flake8 plugin: walks ``tree`` and yields placard's ``PLC`` codes."""
+    """Flake8 plugin emitting placard's ``PLC`` docstring-shape codes.
+
+    Attributes:
+        tree: The module AST flake8 hands the plugin to drive the walk.
+    """
 
     tree: ast.AST
 

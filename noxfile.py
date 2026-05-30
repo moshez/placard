@@ -119,7 +119,6 @@ def lint(session):
         "--arg-type-hints-in-docstring=False",
         "--check-return-types=False",
         "--check-yield-types=False",
-        "--only-attrs-with-ClassVar-are-treated-as-class-attrs=True",
         "src/",
     )
 

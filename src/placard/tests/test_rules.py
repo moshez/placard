@@ -124,6 +124,16 @@ class TestHeaderRules(unittest.TestCase):
         text = "Summary.\n\nReturns:\n    the value.\n"
         assert_that(_codes(text), equal_to([]))
 
+    def test_canonical_attributes_header_is_clean(self) -> None:
+        """``Attributes:`` is canonical because it documents instance state.
+
+        Google style uses ``Attributes:`` in class docstrings to describe
+        public instance attributes (e.g. dataclass fields), so placard
+        accepts it alongside Args/Returns/Raises/Yields.
+        """
+        text = "Summary.\n\nAttributes:\n    x: the input.\n"
+        assert_that(_codes(text), equal_to([]))
+
     def test_recognized_name_with_space_before_colon_passes(self) -> None:
         """``Args :`` (space before colon, no trailing content) is not flagged.
 

@@ -8,7 +8,9 @@ import re
 from dataclasses import dataclass
 from typing import Iterator
 
-RECOGNIZED: frozenset[str] = frozenset({"Args", "Returns", "Raises", "Yields"})
+RECOGNIZED: frozenset[str] = frozenset(
+    {"Args", "Attributes", "Raises", "Returns", "Yields"}
+)
 _RECOGNIZED_LOWER: frozenset[str] = frozenset(label.lower() for label in RECOGNIZED)
 _CANONICAL_HEADERS: frozenset[str] = frozenset(f"{label}:" for label in RECOGNIZED)
 _CANONICAL_ARGS = "Args:"
@@ -20,7 +22,12 @@ _VALID_ARGS_ENTRY = re.compile(r"^[^():]*?[^():\s][^():]*?: \S")
 
 @dataclass(frozen=True, slots=True, kw_only=True)
 class Violation:
-    """A placard violation: ``code`` is the PLCxxx, ``message`` the prose."""
+    """A placard rule violation produced by the docstring checks.
+
+    Attributes:
+        code: The ``PLCxxx`` identifier (e.g. ``PLC101``).
+        message: Human-readable description of what is wrong.
+    """
 
     code: str
     message: str
