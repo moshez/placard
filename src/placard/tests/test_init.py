@@ -1,4 +1,4 @@
-"""Smoke tests for the {{project_name}} package."""
+"""Smoke tests for the placard package."""
 
 import unittest
 from hamcrest import assert_that, contains_string
