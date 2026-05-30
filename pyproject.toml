@@ -15,7 +15,7 @@ authors = [{name = "Moshe Zadka", email = "moshez@zadka.club"}]
 [project.optional-dependencies]
 tests = ["virtue", "pyhamcrest", "coverage"]
 mypy = ["mypy"]
-lint = ["flake8", "black", "stolid>=2026.5.30.77750", "pydoclint"]
+lint = ["flake8", "black", "stolid>=2026.5.30.82599", "pydoclint"]
 docs = ["sphinx"]
 
 [project.license]

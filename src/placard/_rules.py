@@ -4,6 +4,7 @@
 
 from __future__ import annotations
 
+import itertools
 import re
 from dataclasses import dataclass
 from typing import Iterator
@@ -127,16 +128,11 @@ def _colon_form_defect(label: str, tail: str, stripped: str) -> Violation | None
 def _args_bodies(
     cleaned_lines: tuple[str, ...],
 ) -> Iterator[tuple[str, ...]]:
-    cursor = 1
-    while cursor < len(cleaned_lines):
-        entry = cleaned_lines[cursor]
-        cursor += 1
+    for index, entry in enumerate(cleaned_lines[1:], start=1):
         if entry != entry.lstrip() or entry.rstrip() != _CANONICAL_ARGS:
             continue
-        body_start = cursor
-        while cursor < len(cleaned_lines) and _is_body_member(cleaned_lines[cursor]):
-            cursor += 1
-        yield cleaned_lines[body_start:cursor]
+        body = itertools.takewhile(_is_body_member, cleaned_lines[index + 1 :])
+        yield tuple(body)
 
 
 def _is_body_member(entry: str) -> bool:
