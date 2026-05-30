@@ -8,9 +8,11 @@ import re
 from dataclasses import dataclass
 from typing import Iterator
 
-RECOGNIZED = frozenset({"Args", "Attributes", "Raises", "Returns", "Yields"})
-_RECOGNIZED_LOWER: frozenset[str] = frozenset(label.lower() for label in RECOGNIZED)
-_CANONICAL_HEADERS: frozenset[str] = frozenset(f"{label}:" for label in RECOGNIZED)
+_RECOGNIZED: frozenset[str] = frozenset(
+    {"Args", "Attributes", "Raises", "Returns", "Yields"}
+)
+_RECOGNIZED_LOWER: frozenset[str] = frozenset(label.lower() for label in _RECOGNIZED)
+_CANONICAL_HEADERS: frozenset[str] = frozenset(f"{label}:" for label in _RECOGNIZED)
 _CANONICAL_ARGS = "Args:"
 
 _SIGNATURE_LIKE = re.compile(r"^[A-Za-z_]\w*\(")
@@ -104,7 +106,7 @@ def _bare_word_defect(label: str, stripped: str) -> Violation | None:
 
 
 def _colon_form_defect(label: str, tail: str, stripped: str) -> Violation | None:
-    if label in RECOGNIZED:
+    if label in _RECOGNIZED:
         if tail.strip():
             return Violation(
                 code="PLC204",
